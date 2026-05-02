@@ -1,0 +1,180 @@
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <stdio.h>
+#include <time.h>
+
+#pragma comment(lib, "ws2_32.lib")
+
+// --- Logging System ---
+void LogToFile(const char* format, ...) {
+    char buffer[512];
+    va_list args;
+    va_start(args, format);
+    vsprintf_s(buffer, format, args);
+    va_end(args);
+
+    time_t now = time(0);
+    struct tm ltm;
+    localtime_s(&ltm, &now);
+    char timeStr[32];
+    strftime(timeStr, sizeof(timeStr), "[%H:%M:%S]", &ltm);
+
+    FILE* f;
+    if (fopen_s(&f, "redirector_log.txt", "a") == 0) {
+        fprintf(f, "%s %s\n", timeStr, buffer);
+        fclose(f);
+    }
+    OutputDebugStringA(buffer);
+}
+
+// --- Hooking System ---
+void* connect_addr = nullptr;
+BYTE connect_orig[5];
+
+void* wsaconnect_addr = nullptr;
+BYTE wsaconnect_orig[5];
+
+void* getpeername_addr = nullptr;
+BYTE getpeername_orig[5];
+
+DWORD last_target_ip = 0;
+int last_target_port = 0;
+
+// Config
+int target_port = 15779;
+int proxy_port = 31411;
+char proxy_ip[64] = "127.0.0.1";
+
+void LoadConfig() {
+    char configPath[MAX_PATH];
+    GetModuleFileNameA(NULL, configPath, MAX_PATH);
+    char* lastSlash = strrchr(configPath, '\\');
+    if (lastSlash) *(lastSlash + 1) = '\0';
+    strcat_s(configPath, "proxy_config.ini");
+
+    target_port = GetPrivateProfileIntA("Proxy", "TargetPort", 15779, configPath);
+    proxy_port = GetPrivateProfileIntA("Proxy", "ProxyPort", 31411, configPath);
+    GetPrivateProfileStringA("Proxy", "ProxyIP", "127.0.0.1", proxy_ip, sizeof(proxy_ip), configPath);
+    
+    LogToFile("Config Loaded: TargetPort=%d, ProxyPort=%d, ProxyIP=%s", target_port, proxy_port, proxy_ip);
+}
+
+// Hooks
+int WSAAPI hooked_connect(SOCKET s, const struct sockaddr* name, int namelen);
+int WSAAPI hooked_WSAConnect(SOCKET s, const struct sockaddr* name, int namelen, LPWSABUF lpCallerData, LPWSABUF lpCalleeData, LPQOS lpSQOS, LPQOS lpGQOS);
+int WSAAPI hooked_getpeername(SOCKET s, struct sockaddr* name, int* namelen);
+
+void PlaceHook(void* addr, void* hook, BYTE* orig) {
+    DWORD old;
+    VirtualProtect(addr, 5, PAGE_EXECUTE_READWRITE, &old);
+    memcpy(orig, addr, 5);
+    DWORD rel = ((DWORD)hook - (DWORD)addr) - 5;
+    *(BYTE*)addr = 0xE9;
+    *(DWORD*)((BYTE*)addr + 1) = rel;
+    VirtualProtect(addr, 5, old, &old);
+}
+
+void RemoveHook(void* addr, BYTE* orig) {
+    DWORD old;
+    VirtualProtect(addr, 5, PAGE_EXECUTE_READWRITE, &old);
+    memcpy(addr, orig, 5);
+    VirtualProtect(addr, 5, old, &old);
+}
+
+int WSAAPI hooked_connect(SOCKET s, const struct sockaddr* name, int namelen) {
+    RemoveHook(connect_addr, connect_orig);
+    
+    if (name->sa_family == AF_INET) {
+        struct sockaddr_in* addr = (struct sockaddr_in*)name;
+        int port = ntohs(addr->sin_port);
+        LogToFile("connect() called to port: %d", port);
+
+        if (port == target_port) {
+            last_target_ip = addr->sin_addr.S_un.S_addr;
+            last_target_port = port;
+            addr->sin_port = htons(proxy_port);
+            inet_pton(AF_INET, proxy_ip, &(addr->sin_addr));
+            LogToFile(">>> REDIRECTING connect() to %s:%d. Original IP saved for getpeername fake.", proxy_ip, proxy_port);
+        }
+    }
+
+    int res = connect(s, name, namelen);
+    PlaceHook(connect_addr, hooked_connect, connect_orig);
+    return res;
+}
+
+int WSAAPI hooked_WSAConnect(SOCKET s, const struct sockaddr* name, int namelen, LPWSABUF lpCallerData, LPWSABUF lpCalleeData, LPQOS lpSQOS, LPQOS lpGQOS) {
+    RemoveHook(wsaconnect_addr, wsaconnect_orig);
+
+    if (name->sa_family == AF_INET) {
+        struct sockaddr_in* addr = (struct sockaddr_in*)name;
+        int port = ntohs(addr->sin_port);
+        LogToFile("WSAConnect() called to port: %d", port);
+
+        if (port == target_port) {
+            last_target_ip = addr->sin_addr.S_un.S_addr;
+            last_target_port = port;
+            addr->sin_port = htons(proxy_port);
+            inet_pton(AF_INET, proxy_ip, &(addr->sin_addr));
+            LogToFile(">>> REDIRECTING WSAConnect() to %s:%d. Original IP saved for getpeername fake.", proxy_ip, proxy_port);
+        }
+    }
+
+    int res = WSAConnect(s, name, namelen, lpCallerData, lpCalleeData, lpSQOS, lpGQOS);
+    PlaceHook(wsaconnect_addr, hooked_WSAConnect, wsaconnect_orig);
+    return res;
+}
+
+int WSAAPI hooked_getpeername(SOCKET s, struct sockaddr* name, int* namelen) {
+    RemoveHook(getpeername_addr, getpeername_orig);
+    int res = getpeername(s, name, namelen);
+    PlaceHook(getpeername_addr, hooked_getpeername, getpeername_orig);
+
+    if (res == 0 && name != nullptr && name->sa_family == AF_INET) {
+        struct sockaddr_in* addr = (struct sockaddr_in*)name;
+        if (ntohs(addr->sin_port) == proxy_port && last_target_ip != 0) {
+            addr->sin_port = htons(last_target_port);
+            addr->sin_addr.S_un.S_addr = last_target_ip;
+            LogToFile(">>> FAKED getpeername() to return original target IP");
+        }
+    }
+    return res;
+}
+
+void InstallHooks() {
+    HMODULE hWs2 = GetModuleHandleA("ws2_32.dll");
+    if (!hWs2) hWs2 = LoadLibraryA("ws2_32.dll");
+    if (!hWs2) return;
+
+    connect_addr = (void*)GetProcAddress(hWs2, "connect");
+    wsaconnect_addr = (void*)GetProcAddress(hWs2, "WSAConnect");
+    getpeername_addr = (void*)GetProcAddress(hWs2, "getpeername");
+
+    if (connect_addr) {
+        PlaceHook(connect_addr, hooked_connect, connect_orig);
+        LogToFile("Hook installed: connect at %p", connect_addr);
+    }
+    if (wsaconnect_addr) {
+        PlaceHook(wsaconnect_addr, hooked_WSAConnect, wsaconnect_orig);
+        LogToFile("Hook installed: WSAConnect at %p", wsaconnect_addr);
+    }
+    if (getpeername_addr) {
+        PlaceHook(getpeername_addr, hooked_getpeername, getpeername_orig);
+        LogToFile("Hook installed: getpeername at %p", getpeername_addr);
+    }
+}
+
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved) {
+    if (ul_reason_for_call == DLL_PROCESS_ATTACH) {
+        // Clear old log
+        DeleteFileA("redirector_log.txt");
+        LogToFile("DLL Attached. PID: %d", GetCurrentProcessId());
+        LoadConfig();
+        InstallHooks();
+    }
+    return TRUE;
+}
+
+

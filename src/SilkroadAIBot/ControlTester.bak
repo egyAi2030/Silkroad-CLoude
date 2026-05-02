@@ -1,0 +1,35 @@
+using System;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SilkroadAIBot.Test
+{
+    class ControlTester
+    {
+        static async Task Main(string[] args)
+        {
+            Console.WriteLine("Starting Standalone Control API on port 6001...");
+            var listener = new HttpListener();
+            listener.Prefixes.Add("http://localhost:6001/");
+            listener.Start();
+            Console.WriteLine("API Listening on http://localhost:6001/");
+
+            while (true)
+            {
+                var context = await listener.GetContextAsync();
+                var req = context.Request;
+                var res = context.Response;
+
+                Console.WriteLine($"Received {req.HttpMethod} request for {req.Url}");
+
+                string responseString = "{\"status\":\"active\", \"message\":\"Control confirmed\"}";
+                byte[] buffer = Encoding.UTF8.GetBytes(responseString);
+                res.ContentLength64 = buffer.Length;
+                res.ContentType = "application/json";
+                await res.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                res.Close();
+            }
+        }
+    }
+}

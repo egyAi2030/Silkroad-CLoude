@@ -1,0 +1,57 @@
+[
+  {
+    "opcode_hex": "0x1001",
+    "opcode_int": 4097,
+    "name": "FILE_TRANSFER_DATA"
+  },
+  {
+    "opcode_hex": "0x5000",
+    "opcode_int": 20480,
+    "name": "HANDSHAKE_REQ"
+  },
+  {
+    "opcode_hex": "0x2001",
+    "opcode_int": 8193,
+    "name": "IDENTIFY"
+  },
+  {
+    "opcode_hex": "0x2002",
+    "opcode_int": 8194,
+    "name": "KEEP_ALIVE"
+  },
+  {
+    "opcode_hex": "0x2005",
+    "opcode_int": 8197,
+    "name": "STATE_UPDATE"
+  },
+  {
+    "opcode_hex": "0x2209",
+    "opcode_int": 8713,
+    "name": "RELAY_MSG_TO_CLIENT"
+  },
+  {
+    "opcode_hex": "0x6103",
+    "opcode_int": 24835,
+    "name": "AUTH_REQUEST"
+  },
+  {
+    "opcode_hex": "0x7150",
+    "opcode_int": 29008,
+    "name": "ALCHEMY_REINFORCE"
+  },
+  {
+    "opcode_hex": "0x7470",
+    "opcode_int": 29808,
+    "name": "ACADEMY_CREATE"
+  },
+  {
+    "opcode_hex": "0x600D",
+    "opcode_int": 24589,
+    "name": "M"
+  },
+  {
+    "opcode_hex": "0x2311",
+    "opcode_int": 8977,
+    "name": "SHARD_UPDATE"
+  }
+]

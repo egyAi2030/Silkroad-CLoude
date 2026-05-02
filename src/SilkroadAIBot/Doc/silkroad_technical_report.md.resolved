@@ -1,0 +1,126 @@
+# Silkroad Online: Complete Technical Data Report (v3.0)
+
+This report provides an exhaustive analysis of the data structures found in the Silkroad Online client. Each section covers a specific "Set" of files, explaining their purpose, how they connect, and the specific mechanics they control.
+
+---
+
+## Set 1: Entity & Population (Characters, NPCs, Mobs)
+These files define everything that occupies the game world.
+
+### Primary Files
+- `characterdata_*.txt`: The core database for all living entities.
+- `charactervisualchange.txt`: Handles appearance overrides (like Berserk form or Transmutation).
+- `hwanleveldata.txt`: Defines Title/Zerk levels (Knight, Baronet, etc.).
+
+### Deep Dive: `characterdata_*.txt`
+| Field Segment | Purpose |
+| :--- | :--- |
+| **Identity** | Service (1/0), ID, CodeName, LocalName, GroupID. |
+| **Vitals** | Level, HP, MP, Experience reward. |
+| **Combat** | Attack range, Aggro distance, Defense (Phy/Mag), Attack power. |
+| **Movement** | Walk Speed, Run Speed, Berserk Speed. |
+| **Visuals** | Model Path (`.bsr`), Animation set, Skeleton reference. |
+
+---
+
+## Set 2: The Arsenal (Items & Equipment)
+Defines the properties of every physical object in the game.
+
+### Primary Files
+- `itemdata_*.txt`: Definitions for weapons, armor, and consumables.
+- `itemeffect.txt`: Links visual effects (glows, trails) to specific items.
+- `item_grouping.txt`: Categories used for auto-sorting and warehouse filters.
+
+### Technical Breakdown
+- **Rare Items**: Identified by the `_RARE` suffix in CodeName. They use the `MagicOptionAssign` logic to determine base "Blue" stats.
+- **Durability**: Managed via the `MaxDurability` column; a value of `0` usually indicates an indestructible quest item.
+- **Stack Size**: Found in the `MaxStack` column; consumables like HP grains usually have `1000` or `5000`.
+
+---
+
+## Set 3: Combat Mechanics (Skills & Effects)
+The logic engine for damage, buffs, and status ailments.
+
+### Primary Files
+- `skilldata_*.txt`: Casting time, cooldown, mana cost, and damage math.
+- `skilleffect.txt`: The "Visual-Logic" bridge. It tells the client which particle to show when a skill hits.
+- `skillmasterydata.txt`: Defines the Mastery trees (Sword, Bow, Fire, Ice) and level caps.
+
+### Skill Linking Logic
+Skills are often linked in **Chains** or **Series**. Upgrading a skill effectively replaces the previous "Book" with a more powerful version that has a higher ID but shares the same `SkillGroup`.
+
+---
+
+## Set 4: The Economy (Shops & Pricing)
+Controls what NPCs sell and how much things cost.
+
+### Primary Files
+- `refshop.txt`: List of all NPC Shop instances.
+- `refshopgoods.txt`: Links a Shop ID to specific Item IDs.
+- `refshoptab.txt`: Defines the visual tabs in the shop UI (e.g., "Weapon", "Armor").
+- `refpricepolicyofitem.txt`: Defines currency types (Gold, Silk, Arena Coins, Iron Coins).
+
+### Discovery: `refpackageitem.txt`
+This file is used for "Packages" or "Bundles". In the Item Mall, one click might buy a "Beginner Pack" which contains 10 different items; `refpackageitem` maps that single ID to the list of items inside.
+
+---
+
+## Set 5: World Geography (Maps & Teleports)
+The spatial database of the game world.
+
+### Primary Files
+- `refregion.txt`: The grid map. Each 16-bit ID represents a unique square on the world map.
+- `teleportdata.txt`: Locations of gateways and dimensional holes.
+- `teleportlink.txt`: The "Map Graph". It defines that Gate A leads to Gate B and costs X Gold.
+- `worldmap_mapinfo.txt`: Mapping data for the `M` key map interface.
+
+### The Coordinate System
+Silkroad uses a **Region-Local** coordinate system.
+- `X` and `Z` are local to the `RegionID`.
+- `Y` is the altitude (Height).
+- To convert to "World Coordinates", you must multiply RegionID components by the grid size (192).
+
+---
+
+## Set 6: Alchemy & Magic (Attributes)
+The system behind "Blues" and Item Plus (+) enhancements.
+
+### Primary Files
+- `magicoption.txt`: The master list of every blue stat (STR, INT, Critical, etc.).
+- `magicoptionassign.txt`: Defines which items can receive which blues.
+- `refabilitybyitemoptleveldata.txt`: The "Plus" table. It defines exactly how much damage increases for +1, +5, +12, etc.
+
+---
+
+## Set 7: The Narrative (Quests & Dialogue)
+The RPG layer of the game.
+
+### Primary Files
+- `questdata.txt`: The logic flow. If Player has Item A, Show Button B.
+- `textquest_queststring.txt`: The actual story text, objectives, and flavor text.
+- `npcchat.txt`: The idle gossip text NPCs say when you click them.
+
+---
+
+## Set 8: System & UI (The Interface)
+The client's internal configuration.
+
+### Primary Files
+- `textuisystem.txt`: Every label in the game (e.g., "Start Game", "Disconnect", "Inventory").
+- `messagetipdata.txt`: The scrolling tips and system warning messages (e.g., "You do not have enough MP").
+- `gameguidedata.txt`: The tutorial data shown to new players.
+
+---
+
+## Summary of Relationships
+
+| To find... | Start in... | Then look in... |
+| :--- | :--- | :--- |
+| **A Mob's Name** | `characterdata.txt` | `textdata_object.txt` |
+| **A Skill's Damage** | `skilldata.txt` | `skillmasterydata.txt` |
+| **An Item's Price** | `itemdata.txt` | `refpricepolicyofitem.txt` |
+| **A Gate's Destination** | `teleportdata.txt` | `teleportlink.txt` |
+| **An Item's Glow** | `itemdata.txt` | `itemeffect.txt` |
+
+> [!IMPORTANT]
+> When modifying these files for a private server or bot, **Order Matters**. Adding an item to `refshopgoods` without adding it to `itemdata` first will cause a "C9" client crash.

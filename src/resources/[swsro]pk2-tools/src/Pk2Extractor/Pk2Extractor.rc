@@ -1,0 +1,243 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\Pk2Extractor.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PK2EXTRACTOR_DIALOG DIALOGEX 0, 0, 546, 348
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "PK2 Extractor"
+MENU IDR_MENU1
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TREE1,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_TRACKSELECT | 
+                    WS_BORDER | WS_TABSTOP,7,7,278,334
+    PUSHBUTTON      "Extract",IDC_BUTTON2,313,131,50,14,WS_DISABLED
+    PUSHBUTTON      "Extract All",IDC_BUTTON1,397,131,50,14,WS_DISABLED
+    PUSHBUTTON      "Search Mode",IDC_BUTTON3,481,131,50,14,WS_DISABLED
+    EDITTEXT        IDC_EDIT5,14,193,264,14,ES_AUTOHSCROLL | NOT WS_VISIBLE
+    RADIOBUTTON     "Any",IDC_RADIO6,15,220,29,10,BS_FLAT | NOT WS_VISIBLE | 
+                    WS_TABSTOP
+    RADIOBUTTON     "Title Only",IDC_RADIO5,55,220,46,10,BS_FLAT | NOT 
+                    WS_VISIBLE
+    RADIOBUTTON     "Path Only",IDC_RADIO4,112,220,47,10,BS_FLAT | NOT 
+                    WS_VISIBLE
+    PUSHBUTTON      "New Search",IDC_BUTTON4,169,219,50,14,NOT WS_VISIBLE
+    PUSHBUTTON      "Filter Results",IDC_BUTTON5,228,219,50,14,NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDIT6,55,264,60,14,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDIT7,55,281,60,14,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    PUSHBUTTON      "New Search",IDC_BUTTON6,169,281,50,14,NOT WS_VISIBLE
+    PUSHBUTTON      "Filter Results",IDC_BUTTON7,228,281,50,14,NOT 
+                    WS_VISIBLE
+    RADIOBUTTON     "File",IDC_RADIO9,15,323,27,10,BS_FLAT | NOT WS_VISIBLE
+    RADIOBUTTON     "Folder",IDC_RADIO8,79,323,36,10,BS_FLAT | NOT 
+                    WS_VISIBLE
+    PUSHBUTTON      "New Search",IDC_BUTTON8,169,320,50,14,NOT WS_VISIBLE
+    PUSHBUTTON      "Filter Results",IDC_BUTTON9,228,320,50,14,NOT 
+                    WS_VISIBLE
+    GROUPBOX        "Entry Details",IDC_STATIC,303,7,236,100
+    LTEXT           "Name:",IDC_STATIC,312,23,22,8
+    LTEXT           "Path:",IDC_STATIC,312,54,18,8
+    LTEXT           "Size:",IDC_STATIC,312,85,16,8
+    EDITTEXT        IDC_EDIT1,335,20,197,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT2,335,51,197,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT3,335,83,197,14,ES_AUTOHSCROLL | ES_READONLY
+    GROUPBOX        "Status Log",IDC_STATIC,306,165,233,174
+    EDITTEXT        IDC_EDIT4,309,174,222,163,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | 
+                    WS_VSCROLL | WS_HSCROLL
+    GROUPBOX        "Commands",IDC_STATIC,306,115,233,40
+    LISTBOX         IDC_LIST1,7,7,277,163,LBS_NOINTEGRALHEIGHT | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "String Search",IDC_STATIC_1,7,180,277,60,NOT WS_VISIBLE
+    GROUPBOX        "Size Search",IDC_STATIC_2,7,251,277,50,NOT WS_VISIBLE
+    LTEXT           "Min Size:",IDC_STATIC_4,14,266,29,8,NOT WS_VISIBLE
+    LTEXT           "Max Size:",IDC_STATIC_5,14,283,32,8,NOT WS_VISIBLE
+    GROUPBOX        "Type Search",IDC_STATIC_3,7,311,277,30,NOT WS_VISIBLE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "Comments", "Made by Drew Benton"
+            VALUE "CompanyName", "http://0x33.org"
+            VALUE "FileDescription", "Silkroad PK2 Extractor"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "Pk2Extractor.exe"
+            VALUE "LegalCopyright", "(c) 2007 Drew Benton.  All rights reserved."
+            VALUE "OriginalFilename", "Pk2Extractor.exe"
+            VALUE "ProductName", "PK2 Extractor"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_PK2EXTRACTOR_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 539
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 341
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open",                       ID_FILE_OPEN32771
+        MENUITEM "&Close",                      ID_FILE_CLOSE32772
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_FILE_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "res\\Silkroad.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About Pk2Extractor..."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\Pk2Extractor.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

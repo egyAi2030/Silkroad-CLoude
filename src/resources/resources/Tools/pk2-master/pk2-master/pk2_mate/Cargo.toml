@@ -1,0 +1,12 @@
+[package]
+name = "pk2_mate"
+version = "0.0.0"
+authors = ["Lukas Wirth <lukastw97@gmail.com>"]
+edition = "2024"
+publish = false
+
+[dependencies]
+pk2 = { path = "../" }
+pk2-sync = { path = "../crates/pk2-sync" }
+clap = { version = "4", features = ["derive"]}
+camino = "1.1.9"

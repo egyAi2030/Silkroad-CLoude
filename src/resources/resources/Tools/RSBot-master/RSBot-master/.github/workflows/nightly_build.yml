@@ -1,0 +1,83 @@
+name: Nightly
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Check for new commits since last tag
+        id: check_commits
+        shell: pwsh
+        run: |
+          $latest_tag = git describe --tags --abbrev=0
+          $latestTagCommitSha = git rev-list --tags --max-count=1
+          $latestCommitSha = git rev-parse HEAD
+          echo "latest_tag=$latest_tag" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          if ($latestTagCommitSha -ne $latestCommitSha) {
+            echo "has_new_commits=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+            echo "latest_tag_sha=$latestTagCommitSha" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          }
+          else {
+            echo "has_new_commits=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          }
+
+      - name: Get current date
+        if: steps.check_commits.outputs.has_new_commits == 'true'
+        shell: pwsh
+        run: echo "date=$(Get-Date -Format 'yyyy-MM-dd')" | Out-File -FilePath $Env:GITHUB_ENV -Append
+
+      - name: Create changelog
+        if: steps.check_commits.outputs.has_new_commits == 'true'
+        shell: pwsh
+        run: |
+          $gitLog = git log "${{ steps.check_commits.outputs.latest_tag_sha }}..HEAD" --pretty="format:- [%s](https://github.com/SDClowen/RSBot/commit/%H) - @%an"
+          Set-Content -Path "commit_log.md" -Value $gitLog -Encoding UTF8
+          $currentLog = Get-Content -Path commit_log.md -Raw
+          $logWithHeader = "## What's Changed`n" + $currentLog
+          Set-Content -Path commit_log.md -Value $logWithHeader
+
+      - name: Install .NET Core
+        if: steps.check_commits.outputs.has_new_commits == 'true'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Setup MSBuild.exe
+        if: steps.check_commits.outputs.has_new_commits == 'true'
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Handle dependencies
+        if: steps.check_commits.outputs.has_new_commits == 'true'
+        run: dotnet restore RSBot.sln
+
+      - name: Create the app package
+        if: steps.check_commits.outputs.has_new_commits == 'true'
+        run: |
+          msbuild /p:Configuration=Release /p:Platform=x86
+          cd Build
+          Compress-Archive -Path ".\*" -DestinationPath ".\..\RSBot.${{ env.date }}.zip"
+          cd ..
+
+      - name: Create release
+        if: steps.check_commits.outputs.has_new_commits == 'true'
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: RSBot Nightly ${{ env.date }}
+          tag_name: ${{ env.date }}
+          body_path: commit_log.md
+          prerelease: true
+          files: RSBot.${{ env.date }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

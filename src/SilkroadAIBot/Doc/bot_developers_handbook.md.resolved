@@ -1,0 +1,124 @@
+# The Silkroad Bot Developer's Handbook (v5.0)
+
+This is a comprehensive technical manual designed to help you transform raw PK2 extracted data into a functional game bot. Each section explains a core bot feature and the exact files required to implement it.
+
+---
+
+## 1. World Awareness & Object Tracking
+**Goal**: To know what every object in the "Spawn Range" (0x3015 packet) actually is.
+
+### Relevant Files:
+- `characterdata_*.txt` (The Database)
+- `textdata_object.txt` (The Dictionary)
+
+### Bot Implementation:
+When your bot receives a **Single Spawn (0x3015)** packet, it contains a `ModelID` (e.g., `1934`).
+1. **Search**: Look up `1934` in the second column of `characterdata.txt`.
+2. **Identity**: You find `MOB_CH_TIGER`.
+3. **Properties**: Read the stats from that line:
+   - Is it aggressive? (Check Aggro Column)
+   - What is its level? (Check Level Column)
+4. **Naming**: Look up `SN_MOB_CH_TIGER` in `textdata_object.txt` to display "Tiger" in your bot's GUI.
+
+---
+
+## 2. Pathfinding: The "Brain" of the Bot
+**Goal**: To walk from the Town Gate to the Training Area without getting stuck on walls.
+
+### Relevant Files:
+- `Data\navmesh\ainavdata_*.dat`
+- `Map\*\*.m` & `Map\*\*.o`
+- `npcpos.txt`
+
+### Bot Implementation:
+1. **Navmesh Loading**: You must parse the binary `.dat` or `.nvm` files. These contain "Polygons". If a coordinate `(X, Y)` is inside a polygon, the bot can stand there.
+2. **Pathfinding Algorithm**: Use **A* (A-Star)** search.
+3. **Town Walking**: Use `npcpos.txt` to find the exact coordinates of the Blacksmith, Protector, and Grocery NPCs. 
+   - *Tip*: The `npcpos` file contains the `RegionID` and `LocalX`, `LocalY`, `LocalZ`.
+
+---
+
+## 3. Combat Engine: Auto-Skill & Buffing
+**Goal**: To choose the right skill for the right situation and manage Mana.
+
+### Relevant Files:
+- `skilldata_*.txt`
+- `skillmasterydata.txt`
+
+### Bot Implementation:
+1. **Skill Selection**: Your bot UI should only show skills the player has actually learned. Check `skillmasterydata.txt` to see which Masteries are active.
+2. **Cast Logic**:
+   - **Cooldown**: Read the `Cooldown` column in `skilldata`. The bot must wait this many milliseconds before sending the **Skill Use (0x7074)** packet again.
+   - **Mana Check**: Read `MPConsumption`. If current MP < Consumption, don't try to cast.
+   - **Range**: Read `Range`. If Distance(Player, Mob) > Range, the bot must move closer before casting.
+
+---
+
+## 4. Inventory & Loot Filtering
+**Goal**: To automatically pick up valuable items and sell "trash" to the NPC.
+
+### Relevant Files:
+- `itemdata_*.txt`
+- `item_grouping.txt`
+- `refshopgoods.txt`
+
+### Bot Implementation:
+1. **Loot Filter**:
+   - Every dropped item in the **Drop Spawn (0x3015)** packet has an ID.
+   - Look up the ID in `itemdata.txt`.
+   - **Rare Check**: Check the `CodeName` for `_RARE` or `_SET`. If found, pick it up!
+   - **Gold Value**: Check the `Price` column. If it's worth 1 gold, let the bot ignore it.
+2. **Auto-Sell**: When inventory is full, the bot travels to an NPC found in `npcpos`. It then compares the items in its inventory to the player's "Keep List".
+
+---
+
+## 5. Town Scripts: Auto-Supply
+**Goal**: To automatically buy Potions and Bolts when they run low.
+
+### Relevant Files:
+- `refshop.txt`
+- `refshopgoods.txt`
+- `refshoptab.txt`
+
+### Bot Implementation:
+1. **Finding Potions**:
+   - Search `refshopgoods.txt` for the CodeName `ITEM_ETC_HP_POTION_05`.
+   - Find the `ShopID` that sells it.
+   - Look up that `ShopID` in `refshop.txt` to find the NPC CodeName (e.g., `NPC_CH_POTHOLDER`).
+   - Find `NPC_CH_POTHOLDER` in `npcpos.txt` to get the coordinates.
+2. **Buying Logic**: Send the **Shop Buy (0x704B)** packet with the specific slot ID defined in `refshoptab.txt`.
+
+---
+
+## 6. Advanced Mechanics: Alchemy & Plusing
+**Goal**: To automate the "Alchemy" window to plus weapons to +7 or higher.
+
+### Relevant Files:
+- `magicoption.txt` (Blue stats)
+- `refabilitybyitemoptleveldata.txt` (The Math)
+
+### Bot Implementation:
+- Use `refabilitybyitemoptleveldata.txt` to show the player a "Preview" of what their weapon will look like if it hits +12. 
+- Use `magicoption.txt` to help the player search for specific "Blue" stats (like STR 7 or INT 7) when they are using an auto-stat bot.
+
+---
+
+## 7. Major Packet Mapping
+
+| Packet Opcode | Description | Data Link |
+| :--- | :--- | :--- |
+| `0x3015` | Single Spawn | `characterdata.txt` (Mob/NPC) / `itemdata.txt` (Drop) |
+| `0x3013` | Single Despawn | Remove ID from bot's memory |
+| `0x7074` | Use Skill | `skilldata.txt` (Cooldown/Mana) |
+| `0x704B` | Shop Transaction | `refshopgoods.txt` (Slot IDs) |
+| `0x7045` | Teleport Request | `teleportdata.txt` (Portal Coordinates) |
+
+---
+
+## Summary of Botting Strategy
+1. **Index Everything**: On startup, your bot should load `itemdata`, `characterdata`, and `skilldata` into memory (using HashMaps/Dictionaries for speed).
+2. **Sync with Client**: When the client receives a packet, the bot interceptor looks up the ID in the loaded data to decide what to do.
+3. **Automate Decisions**: Use the data to make decisions: "Am I in range?", "Do I have enough MP?", "Is this item worth picking up?".
+
+> [!TIP]
+> Silkroad archives are huge. Do not load every file. For a combat bot, you only need `skilldata`, `characterdata`, and `itemdata`. For a town bot, you also need `npcpos` and `refshopgoods`.

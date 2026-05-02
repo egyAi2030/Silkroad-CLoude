@@ -1,0 +1,15 @@
+D:\Anti\src\ControlTest\bin\Debug\net10.0\ControlTest.exe
+D:\Anti\src\ControlTest\bin\Debug\net10.0\ControlTest.deps.json
+D:\Anti\src\ControlTest\bin\Debug\net10.0\ControlTest.runtimeconfig.json
+D:\Anti\src\ControlTest\bin\Debug\net10.0\ControlTest.dll
+D:\Anti\src\ControlTest\bin\Debug\net10.0\ControlTest.pdb
+D:\Anti\src\ControlTest\obj\Debug\net10.0\ControlTest.GeneratedMSBuildEditorConfig.editorconfig
+D:\Anti\src\ControlTest\obj\Debug\net10.0\ControlTest.AssemblyInfoInputs.cache
+D:\Anti\src\ControlTest\obj\Debug\net10.0\ControlTest.AssemblyInfo.cs
+D:\Anti\src\ControlTest\obj\Debug\net10.0\ControlTest.csproj.CoreCompileInputs.cache
+D:\Anti\src\ControlTest\obj\Debug\net10.0\ControlTest.sourcelink.json
+D:\Anti\src\ControlTest\obj\Debug\net10.0\ControlTest.dll
+D:\Anti\src\ControlTest\obj\Debug\net10.0\refint\ControlTest.dll
+D:\Anti\src\ControlTest\obj\Debug\net10.0\ControlTest.pdb
+D:\Anti\src\ControlTest\obj\Debug\net10.0\ControlTest.genruntimeconfig.cache
+D:\Anti\src\ControlTest\obj\Debug\net10.0\ref\ControlTest.dll

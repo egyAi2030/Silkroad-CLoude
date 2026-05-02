@@ -1,0 +1,116 @@
+# Silkroad Bot Database: Schema Design Proposal (v2.0)
+
+To ensure the bot can access data quickly and maintain the complex relationships between items, mobs, and translations, we will use a **Relational SQL Schema** (optimized for SQLite).
+
+## 1. Core Architecture: The "Common" Model
+Instead of having completely separate tables, we use a `RefObjCommon` table. Every model in the game (NPC, Monster, Weapon, Potion) has one entry here. This allows the bot to resolve any `ModelID` from a packet in a single query.
+
+### Table: `RefObjCommon`
+| Column | Type | Description |
+| :--- | :--- | :--- |
+| **ID** | INT (PK) | The unique numerical ID from characterdata/itemdata. |
+| **CodeName** | TEXT | Internal string ID (e.g., `ITEM_CH_SWORD_01`). |
+| **NameStrID** | TEXT | Link to translation key (e.g., `SN_ITEM_CH_SWORD_01`). |
+| **DescStrID** | TEXT | Link to description key. |
+| **TypeID1** | BYTE | Major Category (1=Char, 3=Item). |
+| **TypeID2** | BYTE | Sub Category. |
+| **TypeID3** | BYTE | Detail Category. |
+| **TypeID4** | BYTE | Specific Category. |
+| **Link** | INT | Pointer to `RefObjChar` or `RefObjItem` table. |
+
+---
+
+## 2. Specialized Data Tables
+These tables hold the "extra" info for specific types of objects.
+
+### Table: `RefObjChar` (Links to Common)
+- **ID**: (FK to Common.ID)
+- **Level**: Entity level.
+- **HP / MP**: Base health and mana.
+- **AggroType**: Aggression logic (Aggressive, Passive, etc.).
+- **WalkSpeed / RunSpeed**: Movement rates for pathfinding.
+
+### Table: `RefObjItem` (Links to Common)
+- **ID**: (FK to Common.ID)
+- **MaxStack**: Maximum count per slot.
+- **Price**: Purchase gold cost.
+- **ReqLevel**: Minimum level to equip.
+- **ItemClass**: Weapon, Armor, Shield, etc.
+
+---
+
+## 3. The Localization System
+This table "solves" the links between IDs and the names you see on screen.
+
+### Table: `RefTextData`
+- **StrID**: (PK) The key from the text files (e.g., `SN_MOB_CH_TIGER`).
+- **Value**: The actual translated text ("Tiger").
+
+---
+
+## 4. Combat & Skills
+### Table: `RefSkill`
+- **ID**: Numerical Skill ID.
+- **CodeName**: Internal ID.
+- **NameStrID**: Link to translation.
+- **CastTime / Cooldown**: Timing data.
+- **MPCost**: Mana requirements.
+- **Range**: Minimum/Maximum range for the bot to stand.
+
+---
+
+## 5. Shop & Economy Logic
+This set of tables allows the bot to know *where* to buy supplies.
+
+### Table: `RefShop`
+- **ID**: Shop identifier.
+- **CodeName**: e.g., `STORE_CH_JANGAN_POTION`.
+
+### Table: `RefShopGoods`
+- **ShopID**: Link to Shop.
+- **ItemID**: Link to Common.ID (What item is sold?).
+- **SlotIndex**: Where it appears in the shop UI.
+
+---
+
+## 6. World & Navigation
+### Table: `RefRegion`
+- **RegionID**: The 16-bit Map Region ID.
+- **WorldX / WorldZ**: Calculated global center coordinates.
+
+### Table: `RefTeleport`
+- **ID**: Gateway ID.
+- **SourceRegion**: Where the gate is.
+- **TargetID**: ID of the destination gate (The Link).
+
+---
+
+## 7. The Packet-to-Data Bridge
+This is the "Secret Sauce" for your bot. It links the binary data in a network packet directly to a database table.
+
+### Table: `RefPacketDataBridge`
+| Packet Type | Target Table | Search Column | Purpose |
+| :--- | :--- | :--- | :--- |
+| **SPAWN** | `RefObjCommon` | `ID` | Identifies Mobs/NPCs/Items appearing on screen. |
+| **SKILL_CAST** | `RefSkill` | `ID` | Gets cooldown/mana for a skill being used. |
+| **ITEM_LOAD** | `RefObjItem` | `ID` | Identifies items in your inventory. |
+| **SHOP_DATA** | `RefShopGoods` | `ItemID` | Links shop slots to actual item properties. |
+| **TELEPORT** | `RefTeleport` | `ID` | Identifies where a portal will take you. |
+
+---
+
+## 8. Summary of Relationships
+
+| To find... | Start in... | Then look in... |
+| :--- | :--- | :--- |
+| **A Mob's Name** | `RefObjCommon` | `RefTextData` |
+| **A Mob's HP** | `RefObjCommon` | `RefObjChar` |
+| **Item Price** | `RefObjCommon` | `RefObjItem` |
+| **Gate Link** | `RefTeleport` | `RefTeleport` (Join on TargetID) |
+
+---
+
+## Why this structure?
+1. **Speed**: By indexing the `ID` and `CodeName` columns, the bot can find any data in less than 1ms.
+2. **Integrity**: Using Foreign Keys (FK) ensures data consistency.
+3. **Packet Efficiency**: The `RefPacketDataBridge` allows the bot to handle incoming data dynamically.

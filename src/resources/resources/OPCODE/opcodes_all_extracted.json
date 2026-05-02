@@ -1,0 +1,872 @@
+[
+  {
+    "opcode_hex": "0x2005",
+    "opcode_int": 8197,
+    "name": "FRAMEWORKMSG_STATE_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xA309",
+    "opcode_int": 41737,
+    "name": "FRAMEWORK_PATCH_PREPARE_ACK",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x35B6",
+    "opcode_int": 13750,
+    "name": "AGENT_GAME_RESET_COMPLETE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x747D",
+    "opcode_int": 29821,
+    "name": "CLIENT_AGENT_ACADEMY_MATCHING_LIST_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB47D",
+    "opcode_int": 46205,
+    "name": "SERVER_AGENT_ACADEMY_MATCHING_LIST_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7157",
+    "opcode_int": 29015,
+    "name": "CLIENT_AGENT_ALCHEMY_DISMANTLE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB157",
+    "opcode_int": 45399,
+    "name": "SERVER_AGENT_ALCHEMY_DISMANTLE_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x34D2",
+    "opcode_int": 13522,
+    "name": "SERVER_AGENT_BARENA_OPERATION",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x74D2",
+    "opcode_int": 29906,
+    "name": "CLIENT_AGENT_BARENA_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x6314",
+    "opcode_int": 25364,
+    "name": "CLIENT_AGENT_CAS_CLIENT_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xA314",
+    "opcode_int": 41748,
+    "name": "SERVER_AGENT_CAS_CLIENT_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x6315",
+    "opcode_int": 25365,
+    "name": "SERVER_AGENT_CAS_SERVER_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x6316",
+    "opcode_int": 25366,
+    "name": "CLIENT_AGENT_CAS_SERVER_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3056",
+    "opcode_int": 12374,
+    "name": "SERVER_AGENT_CHARACTER_EXP_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x304E",
+    "opcode_int": 12366,
+    "name": "SERVER_AGENT_CHARACTER_INFO_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7007",
+    "opcode_int": 28679,
+    "name": "CLIENT_AGENT_CHARACTER_SELECTION_ACTION_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB007",
+    "opcode_int": 45063,
+    "name": "SERVER_AGENT_CHARACTER_SELECTION_ACTION_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7001",
+    "opcode_int": 28673,
+    "name": "CLIENT_AGENT_CHARACTER_SELECTION_JOIN_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB001",
+    "opcode_int": 45057,
+    "name": "SERVER_AGENT_CHARACTER_SELECTION_JOIN_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7450",
+    "opcode_int": 29776,
+    "name": "CLIENT_AGENT_CHARACTER_SELECTION_RENAME_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB450",
+    "opcode_int": 46160,
+    "name": "SERVER_AGENT_CHARACTER_SELECTION_RENAME_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7025",
+    "opcode_int": 28709,
+    "name": "CLIENT_AGENT_CHAT_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB025",
+    "opcode_int": 45093,
+    "name": "SERVER_AGENT_CHAT_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x302D",
+    "opcode_int": 12333,
+    "name": "SERVER_AGENT_CHAT_RESTRICT",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3026",
+    "opcode_int": 12326,
+    "name": "SERVER_AGENT_CHAT_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3530",
+    "opcode_int": 13616,
+    "name": "SERVER_AGENT_CONSIGNMENT_BUFF_ADD",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3532",
+    "opcode_int": 13618,
+    "name": "SERVER_AGENT_CONSIGNMENT_BUFF_REMOVE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3531",
+    "opcode_int": 13617,
+    "name": "SERVER_AGENT_CONSIGNMENT_BUFF_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x750A",
+    "opcode_int": 29962,
+    "name": "CLIENT_AGENT_CONSIGNMENT_BUY_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB50A",
+    "opcode_int": 46346,
+    "name": "SERVER_AGENT_CONSIGNMENT_BUY_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7507",
+    "opcode_int": 29959,
+    "name": "CLIENT_AGENT_CONSIGNMENT_CLOSE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB507",
+    "opcode_int": 46343,
+    "name": "CLIENT_AGENT_CONSIGNMENT_CLOSE_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7506",
+    "opcode_int": 29958,
+    "name": "CLIENT_AGENT_CONSIGNMENT_DETAIL_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB506",
+    "opcode_int": 46342,
+    "name": "SERVER_AGENT_CONSIGNMENT_DETAIL_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x750E",
+    "opcode_int": 29966,
+    "name": "CLIENT_AGENT_CONSIGNMENT_LIST_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB50E",
+    "opcode_int": 46350,
+    "name": "CLIENT_AGENT_CONSIGNMENT_LIST_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7508",
+    "opcode_int": 29960,
+    "name": "CLIENT_AGENT_CONSIGNMENT_REGISTER_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB508",
+    "opcode_int": 46344,
+    "name": "SERVER_AGENT_CONSIGNMENT_REGISTER_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x750C",
+    "opcode_int": 29964,
+    "name": "CLIENT_AGENT_CONSIGNMENT_SEARCH_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB50C",
+    "opcode_int": 46348,
+    "name": "SERVER_AGENT_CONSIGNMENT_SEARCH_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x750B",
+    "opcode_int": 29963,
+    "name": "CLIENT_AGENT_CONSIGNMENT_SETTLE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB50B",
+    "opcode_int": 46347,
+    "name": "SERVER_AGENT_CONSIGNMENT_SETTLE_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7509",
+    "opcode_int": 29961,
+    "name": "CLIENT_AGENT_CONSIGNMENT_UNREGISTER_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB509",
+    "opcode_int": 46345,
+    "name": "SERVER_AGENT_CONSIGNMENT_UNREGISTER_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x350D",
+    "opcode_int": 13581,
+    "name": "SERVER_AGENT_CONSIGNMENT_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7021",
+    "opcode_int": 28705,
+    "name": "CLIENT_AGENT_ENTITY_MOVEMENT_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB021",
+    "opcode_int": 45089,
+    "name": "SERVER_AGENT_ENTITY_MOVEMENT_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3020",
+    "opcode_int": 12320,
+    "name": "SERVER_AGENT_ENVIROMMENT_CELESTIAL_POSITION",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3027",
+    "opcode_int": 12327,
+    "name": "SERVER_AGENT_ENVIRONMENT_CELESTIAL_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3809",
+    "opcode_int": 14345,
+    "name": "SERVER_AGENT_ENVIRONMENT_WEATHER_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7083",
+    "opcode_int": 28803,
+    "name": "CLIENT_AGENT_EXCHANGE_APPROVE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB083",
+    "opcode_int": 45187,
+    "name": "SERVER_AGENT_EXCHANGE_APPROVE_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3087",
+    "opcode_int": 12423,
+    "name": "SERVER_AGENT_EXCHANGE_APPROVED",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7084",
+    "opcode_int": 28804,
+    "name": "CLIENT_AGENT_EXCHANGE_CANCEL_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB084",
+    "opcode_int": 45188,
+    "name": "SERVER_AGENT_EXCHANGE_CANCEL_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3088",
+    "opcode_int": 12424,
+    "name": "SERVER_AGENT_EXCHANGE_CANCELED",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7082",
+    "opcode_int": 28802,
+    "name": "CLIENT_AGENT_EXCHANGE_CONFIRM_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB082",
+    "opcode_int": 45186,
+    "name": "SERVER_AGENT_EXCHANGE_CONFIRM_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3086",
+    "opcode_int": 12422,
+    "name": "SERVER_AGENT_EXCHANGE_CONFIRMED",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7081",
+    "opcode_int": 28801,
+    "name": "CLIENT_AGENT_EXCHANGE_START_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB081",
+    "opcode_int": 45185,
+    "name": "SERVER_AGENT_EXCHANGE_START_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3085",
+    "opcode_int": 12421,
+    "name": "SERVER_AGENT_EXCHANGE_STARTED",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3089",
+    "opcode_int": 12425,
+    "name": "SERVER_AGENT_EXCHANGE_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x308C",
+    "opcode_int": 12428,
+    "name": "SERVER_AGENT_EXCHANGE_UPDATE_ITEMS",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x34B1",
+    "opcode_int": 13489,
+    "name": "SERVER_AGENT_FLAGWAR_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7516",
+    "opcode_int": 29974,
+    "name": "CLIENT_AGENT_FRPVP_UPDATE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB516",
+    "opcode_int": 46358,
+    "name": "CLIENT_AGENT_FRPVP_UPDATE_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x300C",
+    "opcode_int": 12300,
+    "name": "G",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x70EA",
+    "opcode_int": 28906,
+    "name": "CLIENT_AGENT_GUIDE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB0EA",
+    "opcode_int": 45290,
+    "name": "SERVER_AGENT_GUIDE_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x30FF",
+    "opcode_int": 12543,
+    "name": "AGENT_GUILD_ENTITY_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x34B3",
+    "opcode_int": 13491,
+    "name": "SERVER_AGENT_GUILD_INFO_BEGIN",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3101",
+    "opcode_int": 12545,
+    "name": "SERVER_AGENT_GUILD_INFO_DATA",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x34B4",
+    "opcode_int": 13492,
+    "name": "SERVER_AGENT_GUILD_INFO_END",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3038",
+    "opcode_int": 12344,
+    "name": "AGENT_INVENTORY_ENTITY_EQUIP",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3041",
+    "opcode_int": 12353,
+    "name": "SR_EQUIP_CHANGE_TIMER_START",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3039",
+    "opcode_int": 12345,
+    "name": "AGENT_INVENTORY_ENTITY_UNEQUIP",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x74D4",
+    "opcode_int": 29908,
+    "name": "CLIENT_JOB_EXPORT_DETAIL",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB4D4",
+    "opcode_int": 46292,
+    "name": "CLIENT_JOB_EXPORT_DETAIL",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x70E1",
+    "opcode_int": 28897,
+    "name": "SERVER_AGENT_JOB_JOIN_REQ",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB0E1",
+    "opcode_int": 45281,
+    "name": "SERVER_AGENT_JOB_JOIN_ACK",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x70E2",
+    "opcode_int": 28898,
+    "name": "SERVER_AGENT_JOB_LEAVE_REQ",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB0E2",
+    "opcode_int": 45282,
+    "name": "SERVER_AGENT_JOB_LEAVE_ACK",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x30E6",
+    "opcode_int": 12518,
+    "name": "SERVER_AGENT_JOB_UPDATE_EXP",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7005",
+    "opcode_int": 28677,
+    "name": "CLIENT_AGENT_LOGOUT_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB005",
+    "opcode_int": 45061,
+    "name": "SERVER_AGENT_LOGOUT_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7006",
+    "opcode_int": 28678,
+    "name": "CLIENT_AGENT_LOGOUT_CANCEL_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB006",
+    "opcode_int": 45062,
+    "name": "SERVER_AGENT_LOGOUT_CANCEL_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x300A",
+    "opcode_int": 12298,
+    "name": "SERVER_AGENT_LOGOUT_SUCCESS",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7060",
+    "opcode_int": 28768,
+    "name": "CLIENT_AGENT_PARTY_CREATE_REQ",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB060",
+    "opcode_int": 45152,
+    "name": "SERVER_AGENT_PARTY_CREATE_ACK",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3065",
+    "opcode_int": 12389,
+    "name": "SERVER_AGENT_PARTY_CREATE_FROM_MATCHING",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3068",
+    "opcode_int": 12392,
+    "name": "SERVER_AGENT_PARTY_DISTRIBUTION",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7062",
+    "opcode_int": 28770,
+    "name": "CLIENT_AGENT_PARTY_INVITE_REQ",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB062",
+    "opcode_int": 45154,
+    "name": "SERVER_AGENT_PARTY_INVITE_ACK",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7063",
+    "opcode_int": 28771,
+    "name": "CLIENT_AGENT_PARTY_KICK_REQ",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7061",
+    "opcode_int": 28769,
+    "name": "CLIENT_AGENT_PARTY_LEAVE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x706A",
+    "opcode_int": 28778,
+    "name": "CLIENT_AGENT_PARTY_MATCHING_CHANGE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB06A",
+    "opcode_int": 45162,
+    "name": "SERVER_AGENT_PARTY_MATCHING_CHANGE_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x706B",
+    "opcode_int": 28779,
+    "name": "CLIENT_AGENT_PARTY_MATCHING_DELETE_REQ",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB06B",
+    "opcode_int": 45163,
+    "name": "SERVER_AGENT_PARTY_MATCHING_DELETE_ACK",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x7069",
+    "opcode_int": 28777,
+    "name": "CLIENT_AGENT_PARTY_MATCHING_FORM_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB069",
+    "opcode_int": 45161,
+    "name": "SERVER_AGENT_PARTY_MATCHING_FORM_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x706D",
+    "opcode_int": 28781,
+    "name": "CLIENT_AGENT_PARTY_MATCHING_JOIN_REQ",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB06D",
+    "opcode_int": 45165,
+    "name": "SERVER_AGENT_PARTY_MATCHING_JOIN_ACK",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x706C",
+    "opcode_int": 28780,
+    "name": "CLIENT_AGENT_PARTY_MATCHING_LIST_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB06C",
+    "opcode_int": 45164,
+    "name": "SERVER_AGENT_PARTY_MATCHING_LIST_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x306E",
+    "opcode_int": 12398,
+    "name": "CLIENT_AGENT_PARTY_MATCHING_PLAYER_JOIN_ACK",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x3864",
+    "opcode_int": 14436,
+    "name": "SERVER_AGENT_PARTY_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x385F",
+    "opcode_int": 14431,
+    "name": "SERVER_AGENT_SIEGE_UPDATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x70A2",
+    "opcode_int": 28834,
+    "name": "CLIENT_AGENT_SKILL_MASTERY_LEARN_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB0A2",
+    "opcode_int": 45218,
+    "name": "SERVER_AGENT_SKILL_MASTERY_LEARN_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x70B4",
+    "opcode_int": 28852,
+    "name": "CLIENT_AGENT_STALL_BUY_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB0B4",
+    "opcode_int": 45236,
+    "name": "SERVER_AGENT_STALL_BUY_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x70B1",
+    "opcode_int": 28849,
+    "name": "CLIENT_AGENT_STALL_CREATE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB0B1",
+    "opcode_int": 45233,
+    "name": "SERVER_AGENT_STALL_CREATE_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x70B2",
+    "opcode_int": 28850,
+    "name": "CLIENT_AGENT_STALL_DESTROY_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB0B2",
+    "opcode_int": 45234,
+    "name": "SERVER_AGENT_STALL_DESTROY_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x30B7",
+    "opcode_int": 12471,
+    "name": "SERVER_AGENT_ENTITY_STALL_ACTION",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x30B8",
+    "opcode_int": 12472,
+    "name": "SERVER_AGENT_ENTITY_STALL_CREATE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x30B9",
+    "opcode_int": 12473,
+    "name": "SERVER_AGENT_ENTITY_STALL_DESTROY",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x30BB",
+    "opcode_int": 12475,
+    "name": "SERVER_AGENT_ENTITY_STALL_NAME",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x70B5",
+    "opcode_int": 28853,
+    "name": "CLIENT_AGENT_STALL_LEAVE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB0B5",
+    "opcode_int": 45237,
+    "name": "SERVER_AGENT_STALL_LEAVE_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x70B3",
+    "opcode_int": 28851,
+    "name": "CLIENT_AGENT_STALL_TALK_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB0B3",
+    "opcode_int": 45235,
+    "name": "SERVER_AGENT_STALL_TALK_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x70BA",
+    "opcode_int": 28858,
+    "name": "CLIENT_AGENT_STALL_UPDATE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB0BA",
+    "opcode_int": 45242,
+    "name": "SERVER_AGENT_STALL_UPDATE_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x34E1",
+    "opcode_int": 13537,
+    "name": "SERVER_AGENT_TAP_ICON",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x74DF",
+    "opcode_int": 29919,
+    "name": "CLIENT_AGENT_TAP_INFO_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB4DF",
+    "opcode_int": 46303,
+    "name": "SERVER_AGENT_TAP_INFO_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x74E0",
+    "opcode_int": 29920,
+    "name": "CLIENT_AGENT_TAP_UPDATE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0xB4E0",
+    "opcode_int": 46304,
+    "name": "SERVER_AGENT_TAP_UPDATE_RESPONSE",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x705A",
+    "opcode_int": 28762,
+    "name": "CLIENT_AGENT_TELEPORT_USE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x6005",
+    "opcode_int": 24581,
+    "name": "SERVER_GLOBAL_STATE_REQUEST",
+    "source": "sro ec.txt"
+  },
+  {
+    "opcode_hex": "0x1001",
+    "opcode_int": 4097,
+    "name": "FILE_TRANSFER_DATA",
+    "source": "sro packets.txt"
+  },
+  {
+    "opcode_hex": "0x5000",
+    "opcode_int": 20480,
+    "name": "HANDSHAKE_REQ",
+    "source": "sro packets.txt"
+  },
+  {
+    "opcode_hex": "0x2001",
+    "opcode_int": 8193,
+    "name": "IDENTIFY",
+    "source": "sro packets.txt"
+  },
+  {
+    "opcode_hex": "0x2002",
+    "opcode_int": 8194,
+    "name": "KEEP_ALIVE",
+    "source": "sro packets.txt"
+  },
+  {
+    "opcode_hex": "0x2209",
+    "opcode_int": 8713,
+    "name": "RELAY_MSG_TO_CLIENT",
+    "source": "sro packets.txt"
+  },
+  {
+    "opcode_hex": "0x6103",
+    "opcode_int": 24835,
+    "name": "AUTH_REQUEST",
+    "source": "sro packets.txt"
+  },
+  {
+    "opcode_hex": "0x7150",
+    "opcode_int": 29008,
+    "name": "ALCHEMY_REINFORCE",
+    "source": "sro packets.txt"
+  },
+  {
+    "opcode_hex": "0x7470",
+    "opcode_int": 29808,
+    "name": "ACADEMY_CREATE",
+    "source": "sro packets.txt"
+  },
+  {
+    "opcode_hex": "0x600D",
+    "opcode_int": 24589,
+    "name": "M",
+    "source": "sro packets.txt"
+  },
+  {
+    "opcode_hex": "0x2311",
+    "opcode_int": 8977,
+    "name": "SHARD_UPDATE",
+    "source": "sro packets.txt"
+  }
+]

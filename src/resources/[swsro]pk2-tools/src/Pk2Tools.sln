@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pk2Extractor", "Pk2Extractor\Pk2Extractor.vcproj", "{EB4375E6-4775-4E3C-9ABF-5CF3BF9E6FB2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pk2Editor", "Pk2Editor\Pk2Editor.vcproj", "{30D53DB3-E2AD-48A5-9198-D8812CADA253}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB4375E6-4775-4E3C-9ABF-5CF3BF9E6FB2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EB4375E6-4775-4E3C-9ABF-5CF3BF9E6FB2}.Debug|Win32.Build.0 = Debug|Win32
+		{EB4375E6-4775-4E3C-9ABF-5CF3BF9E6FB2}.Release|Win32.ActiveCfg = Release|Win32
+		{EB4375E6-4775-4E3C-9ABF-5CF3BF9E6FB2}.Release|Win32.Build.0 = Release|Win32
+		{30D53DB3-E2AD-48A5-9198-D8812CADA253}.Debug|Win32.ActiveCfg = Debug|Win32
+		{30D53DB3-E2AD-48A5-9198-D8812CADA253}.Debug|Win32.Build.0 = Debug|Win32
+		{30D53DB3-E2AD-48A5-9198-D8812CADA253}.Release|Win32.ActiveCfg = Release|Win32
+		{30D53DB3-E2AD-48A5-9198-D8812CADA253}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
